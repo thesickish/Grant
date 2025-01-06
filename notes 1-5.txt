@@ -1,0 +1,10 @@
+Reasons for petitioning:
+- delta is large
+- delta is > 5%
+
+- over time: 
+-- total value of properties
+-- how much they go up each year (%,value)
+-- how much did he protest each year
+-- how successful were the protests (%,value)
+ 
