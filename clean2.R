@@ -23,10 +23,4 @@ names(petitions)[20] <- 'LPV_change'
 names(petitions)[2] <- 'date'
 petitions = separate_wider_delim(petitions, cols = date, delim = "/", names = c("month", "day","year"),too_few = "align_start")
 
-# plot of LPV changes across the years
-p <- ggplot(petitions, aes(x=year, y=LPV_change)) + geom_boxplot() + theme_minimal()
-p = p + geom_point(color = "blue",stat = "sum", aes(size = ..n..)) 
 
-# plot of FCV changes across the years
-p <- ggplot(petitions, aes(x=year, y=FCV_change)) + geom_boxplot() + theme_minimal()
-p = p + geom_point(color = "blue",stat = "sum", aes(size = ..n..)) 
