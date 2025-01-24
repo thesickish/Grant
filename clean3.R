@@ -23,10 +23,14 @@ names(petitions)[20] <- 'LPV_change'
 names(petitions)[2] <- 'date'
 petitions = separate_wider_delim(petitions, cols = date, delim = "/", names = c("month", "day","year"),too_few = "align_start")
 
-# plot of LPV changes across the years
-p1a <- ggplot(petitions, aes(x=year, y=FCV_change)) + geom_boxplot() + theme_minimal()
-p1a <- p1a + geom_point(color = "blue",stat = "sum", aes(size = after_stat(n))) 
+p3a_noNA <- petitions %>% drop_na(FCV_owner, FCV_notice, FCV_decision, year)
 
-# plot of FCV changes across the years
-p1b <- ggplot(petitions, aes(x=year, y=LPV_change)) + geom_boxplot() + theme_minimal()
-p1b <- p1b + geom_point(color = "blue",stat = "sum", aes(size = after_stat(n))) 
+p3a <- ggplot(p3a_noNA %>% pivot_longer(cols = c(FCV_owner, FCV_notice, FCV_decision), names_to = "variable", values_to = "value"), 
+       aes(x = year, y = value, fill = variable)) + 
+       geom_boxplot() + scale_fill_manual(values = c("red", "blue", "green")) + theme_minimal()
+
+p3b_noNA <- petitions %>% drop_na(LPV_owner, LPV_notice, LPV_decision, year)
+
+p3b <- ggplot(p3b_noNA %>% pivot_longer(cols = c(LPV_owner, LPV_notice, LPV_decision), names_to = "variable", values_to = "value"), 
+              aes(x = year, y = value, fill = variable)) + 
+  geom_boxplot() + scale_fill_manual(values = c("red", "blue", "green")) + theme_minimal()
