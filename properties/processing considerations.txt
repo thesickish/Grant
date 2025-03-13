@@ -1,0 +1,9 @@
+In 2014-16 -  The last small table has a bottom row stating “NPM #1 Pima County Total” – Pima county isn’t at issue, so we can exclude it. The rest of the small tables should be included. They can be treated as subsidiaries for the analysis.
+
+ 
+
+In 2017-18 – Same thing, exclude the last small table relating to the “Pima County Total,” but include all the rest.
+
+ 
+
+In 2018-2025 – We need to exclude the last three small tables, relating to “Pima County Total” (also titled “Property” and “Green Valley Village”) and “Pharr Hidalgo County Total.” Note that there’s one small table still included, which references Loma Linda and Delta Prop—those two are still in Santa Cruz and should be included.

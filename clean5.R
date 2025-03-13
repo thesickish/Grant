@@ -41,6 +41,8 @@ p5b <- ggplot(p5b_noNA %>% pivot_longer(cols = c(LPV_owner_adv, LPV_owner_disadv
               aes(x = year, y = value, fill = variable)) + 
   geom_boxplot(outlier.shape = NA) + scale_fill_manual(values = c("blue", "red")) + theme_minimal()
 
+p5b <- p5b + ylim(-1000000, 1000000)
+
 
 petitions$FCV_owner_adv2 = petitions$FCV_owner_adv - petitions$FCV_owner_disadv
 
