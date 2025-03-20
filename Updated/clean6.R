@@ -24,22 +24,24 @@ names(petitions)[22] <- 'LPV_change'
 petitions$tax_year = as.character(petitions$tax_year)
 pet = subset(petitions,include == 1)
 
-petitions$FCV_owner_gain = (petitions$FCV_notice - petitions$FCV_decision)/(petitions$FCV_notice - petitions$FCV_owner)
+pet$FCV_owner = as.numeric(pet$FCV_owner)
+pet$LPV_owner = as.numeric(pet$LPV_owner)
+pet$FCV_notice = as.numeric(pet$FCV_notice)
+pet$LPV_notice = as.numeric(pet$LPV_notice)
+pet$FCV_decision = as.numeric(pet$FCV_decision)
+pet$LPV_decision = as.numeric(pet$LPV_decision)
 
-p6a_noNA <- petitions %>% drop_na(FCV_owner_gain, tax_year)
+pet$FCV_owner_gain = (pet$FCV_notice - pet$FCV_decision)/(pet$FCV_notice - pet$FCV_owner)
 
-p6a <- ggplot(p6a_noNA %>% pivot_longer(cols = c(FCV_owner_gain), names_to = "variable", values_to = "value"), 
+p6a <- ggplot(pet %>% pivot_longer(cols = c(FCV_owner_gain), names_to = "variable", values_to = "value"), 
                aes(x = tax_year, y = value)) + 
   geom_boxplot() + theme_minimal()
 
 p6a <- p6a + geom_point(color = "blue",stat = "sum", aes(size = after_stat(n))) 
 
+pet$LPV_owner_gain = (pet$LPV_notice - pet$LPV_decision)/(pet$LPV_notice - pet$LPV_owner)
 
-petitions$LPV_owner_gain = (petitions$LPV_notice - petitions$LPV_decision)/(petitions$LPV_notice - petitions$LPV_owner)
-
-p6b_noNA <- petitions %>% drop_na(LPV_owner_gain, year)
-
-p6b <- ggplot(p6b_noNA %>% pivot_longer(cols = c(LPV_owner_gain), names_to = "variable", values_to = "value"), 
+p6b <- ggplot(pet %>% pivot_longer(cols = c(LPV_owner_gain), names_to = "variable", values_to = "value"), 
               aes(x = tax_year, y = value)) + 
   geom_boxplot() + theme_minimal()
 

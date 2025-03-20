@@ -24,19 +24,32 @@ names(petitions)[22] <- 'LPV_change'
 petitions$tax_year = as.character(petitions$tax_year)
 pet = subset(petitions,include == 1)
 
-petitions$FCV_owner_adv = petitions$FCV_notice - petitions$FCV_decision
-petitions$FCV_owner_disadv = petitions$FCV_decision - petitions$FCV_owner
+pet$FCV_owner = as.numeric(pet$FCV_owner)
+pet$LPV_owner = as.numeric(pet$LPV_owner)
+pet$FCV_notice = as.numeric(pet$FCV_notice)
+pet$LPV_notice = as.numeric(pet$LPV_notice)
+pet$FCV_decision = as.numeric(pet$FCV_decision)
+pet$LPV_decision = as.numeric(pet$LPV_decision)
 
-petitions$LPV_owner_adv = petitions$LPV_notice - petitions$LPV_decision
-petitions$LPV_owner_disadv = petitions$LPV_decision - petitions$LPV_owner
+pet$FCV_owner_adv = pet$FCV_notice - pet$FCV_decision
+pet$FCV_owner_disadv = pet$FCV_decision - pet$FCV_owner
 
-p7a <- ggplot(petitions, aes(x=tax_year, y=FCV_owner_adv)) + theme_minimal()
+pet$LPV_owner_adv = pet$LPV_notice - pet$LPV_decision
+pet$LPV_owner_disadv = pet$LPV_decision - pet$LPV_owner
+
+p7a <- ggplot(pet, aes(x=tax_year, y=FCV_owner_adv)) + theme_minimal()
 p7a <- p7a + stat_summary(fun = sum, geom = "bar", aes(group = 1))
 
-p7b <- ggplot(petitions, aes(x=tax_year, y=LPV_owner_adv)) + theme_minimal()
+p7b <- ggplot(pet, aes(x=tax_year, y=LPV_owner_adv)) + theme_minimal()
 p7b <- p7b + stat_summary(fun = sum, geom = "bar", aes(group = 1))
 
-p7a2 <- ggplot(petitions) + theme_minimal()
+p7a2 <- ggplot(pet) + theme_minimal()
 p7a2 <- p7a2 + stat_summary(aes(x = tax_year, y = FCV_owner_adv, color = "FCV Owner Adv", group = 1), fun = sum, geom = "line")
 p7a2 <- p7a2 + stat_summary(aes(x = tax_year, y = FCV_owner_disadv, color = "FCV Owner Disadv", group = 1), fun = sum, geom = "line")
 p7a2 <- p7a2 + scale_color_manual(values = c("FCV Owner Adv" = "blue", "FCV Owner Disadv" = "red"))
+
+p7b2 <- ggplot(pet) + theme_minimal()
+p7b2 <- p7b2 + stat_summary(aes(x = tax_year, y = LPV_owner_adv, color = "LPV Owner Adv", group = 1), fun = sum, geom = "line")
+p7b2 <- p7b2 + stat_summary(aes(x = tax_year, y = LPV_owner_disadv, color = "LPV Owner Disadv", group = 1), fun = sum, geom = "line")
+p7b2 <- p7b2 + scale_color_manual(values = c("LPV Owner Adv" = "blue", "LPV Owner Disadv" = "red"))
+

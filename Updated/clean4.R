@@ -24,26 +24,21 @@ names(petitions)[22] <- 'LPV_change'
 petitions$tax_year = as.character(petitions$tax_year)
 pet = subset(petitions,include == 1)
 
-p4a_noNA <- petitions %>% filter(!(is.na(outcome_FCV)|(is.na(tax_year))))
-
-p4a <- ggplot(p4a_noNA %>% count(year, outcome_FCV), 
+p4a <- ggplot(pet %>% count(tax_year, outcome_FCV), 
                aes(x = tax_year, y = n, color = outcome_FCV, group = outcome_FCV)) + 
   geom_line(size = 1) + 
   geom_point(size = 2) + 
-  scale_color_manual(values = c("No Change" = "darkgreen", 
+  scale_color_manual(values = c("No Change or Worse" = "darkgreen", 
                                 "Granted in Full" = "black", 
                                 "Granted in Part" = "darkgrey")) + 
   theme_minimal() + 
   labs(title = "Trends in Outcomes Over Time", x = "Year", y = "Count", color = "Outcome")
 
-
-p4b_noNA <- petitions %>% filter(!(is.na(outcome_FCV)|(is.na(year))))
-
-p4b <- ggplot(p4b_noNA %>% count(year, outcome_LPV), 
+p4b <- ggplot(pet %>% count(tax_year, outcome_LPV), 
               aes(x = tax_year, y = n, color = outcome_LPV, group = outcome_LPV)) + 
   geom_line(size = 1) + 
   geom_point(size = 2) + 
-  scale_color_manual(values = c("No Change" = "darkgreen", 
+  scale_color_manual(values = c("No Change or Worse" = "darkgreen", 
                                 "Granted in Full" = "black", 
                                 "Granted in Part" = "darkgrey")) + 
   theme_minimal() + 

@@ -24,41 +24,40 @@ names(petitions)[22] <- 'LPV_change'
 petitions$tax_year = as.character(petitions$tax_year)
 pet = subset(petitions,include == 1)
 
-petitions$FCV_owner_adv = petitions$FCV_notice - petitions$FCV_decision
-petitions$FCV_owner_disadv = petitions$FCV_decision - petitions$FCV_owner
+pet$FCV_owner = as.numeric(pet$FCV_owner)
+pet$LPV_owner = as.numeric(pet$LPV_owner)
+pet$FCV_notice = as.numeric(pet$FCV_notice)
+pet$LPV_notice = as.numeric(pet$LPV_notice)
+pet$FCV_decision = as.numeric(pet$FCV_decision)
+pet$LPV_decision = as.numeric(pet$LPV_decision)
 
-p5a_noNA <- petitions %>% drop_na(FCV_owner_adv, FCV_owner_disadv, tax_year)
+pet$FCV_owner_adv = pet$FCV_notice - pet$FCV_decision
+pet$FCV_owner_disadv = pet$FCV_decision - pet$FCV_owner
 
-p5a <- ggplot(p5a_noNA %>% pivot_longer(cols = c(FCV_owner_adv, FCV_owner_disadv), names_to = "variable", values_to = "value"), 
+p5a <- ggplot(pet %>% pivot_longer(cols = c(FCV_owner_adv, FCV_owner_disadv), names_to = "variable", values_to = "value"), 
               aes(x = tax_year, y = value, fill = variable)) + 
   geom_boxplot(outlier.shape = NA) + scale_fill_manual(values = c("blue", "red")) + theme_minimal()
 
-petitions$LPV_owner_adv = petitions$LPV_notice - petitions$LPV_decision
-petitions$LPV_owner_disadv = petitions$LPV_decision - petitions$LPV_owner
+p5a <- p5a + ylim(-125000, 1250000)
 
-p5b_noNA <- petitions %>% drop_na(LPV_owner_adv, LPV_owner_disadv, year)
+pet$LPV_owner_adv = pet$LPV_notice - pet$LPV_decision
+pet$LPV_owner_disadv = pet$LPV_decision - pet$LPV_owner
 
-p5b <- ggplot(p5b_noNA %>% pivot_longer(cols = c(LPV_owner_adv, LPV_owner_disadv), names_to = "variable", values_to = "value"), 
+p5b <- ggplot(pet %>% pivot_longer(cols = c(LPV_owner_adv, LPV_owner_disadv), names_to = "variable", values_to = "value"), 
               aes(x = tax_year, y = value, fill = variable)) + 
   geom_boxplot(outlier.shape = NA) + scale_fill_manual(values = c("blue", "red")) + theme_minimal()
 
-p5b <- p5b + ylim(-1000000, 1000000)
+p5b <- p5b + ylim(-100000, 1000000)
 
+pet$FCV_owner_adv2 = pet$FCV_owner_adv - pet$FCV_owner_disadv
 
-petitions$FCV_owner_adv2 = petitions$FCV_owner_adv - petitions$FCV_owner_disadv
-
-p5a2_noNA <- petitions %>% drop_na(FCV_owner_adv2, year)
-
-p5a2 <- ggplot(p5a2_noNA %>% pivot_longer(cols = c(FCV_owner_adv2), names_to = "variable", values_to = "value"), 
+p5a2 <- ggplot(pet %>% pivot_longer(cols = c(FCV_owner_adv2), names_to = "variable", values_to = "value"), 
               aes(x = tax_year, y = value, fill = variable)) + 
   geom_boxplot() + scale_fill_manual(values = c("blue")) + theme_minimal()
 
+pet$LPV_owner_adv2 = pet$LPV_owner_adv - pet$LPV_owner_disadv
 
-petitions$LPV_owner_adv2 = petitions$LPV_owner_adv - petitions$LPV_owner_disadv
-
-p5b2_noNA <- petitions %>% drop_na(LPV_owner_adv2, year)
-
-p5b2 <- ggplot(p5b2_noNA %>% pivot_longer(cols = c(LPV_owner_adv2), names_to = "variable", values_to = "value"), 
+p5b2 <- ggplot(pet %>% pivot_longer(cols = c(LPV_owner_adv2), names_to = "variable", values_to = "value"), 
                aes(x = tax_year, y = value, fill = variable)) + 
   geom_boxplot() + scale_fill_manual(values = c("blue")) + theme_minimal()
 

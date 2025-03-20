@@ -24,14 +24,17 @@ names(petitions)[22] <- 'LPV_change'
 petitions$tax_year = as.character(petitions$tax_year)
 pet = subset(petitions,include == 1)
 
-p3a_noNA <- petitions %>% drop_na(FCV_owner, FCV_notice, FCV_decision, tax_year)
+pet$FCV_owner = as.numeric(pet$FCV_owner)
+pet$LPV_owner = as.numeric(pet$LPV_owner)
+pet$FCV_notice = as.numeric(pet$FCV_notice)
+pet$LPV_notice = as.numeric(pet$LPV_notice)
+pet$FCV_decision = as.numeric(pet$FCV_decision)
+pet$LPV_decision = as.numeric(pet$LPV_decision)
 
-p3a <- ggplot(p3a_noNA %>% pivot_longer(cols = c(FCV_owner, FCV_notice, FCV_decision), names_to = "variable", values_to = "value"), 
+p3a <- ggplot(pet %>% pivot_longer(cols = c(FCV_owner, FCV_notice, FCV_decision), names_to = "variable", values_to = "value"), 
        aes(x = tax_year, y = value, fill = variable)) + 
        geom_boxplot() + scale_fill_manual(values = c("red", "blue", "green")) + theme_minimal()
 
-p3b_noNA <- petitions %>% drop_na(LPV_owner, LPV_notice, LPV_decision, year)
-
-p3b <- ggplot(p3b_noNA %>% pivot_longer(cols = c(LPV_owner, LPV_notice, LPV_decision), names_to = "variable", values_to = "value"), 
+p3b <- ggplot(pet %>% pivot_longer(cols = c(LPV_owner, LPV_notice, LPV_decision), names_to = "variable", values_to = "value"), 
               aes(x = tax_year, y = value, fill = variable)) + 
   geom_boxplot() + scale_fill_manual(values = c("red", "blue", "green")) + theme_minimal()
