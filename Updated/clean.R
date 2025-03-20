@@ -21,10 +21,18 @@ names(petitions)[20] <- 'outcome_details'
 names(petitions)[21] <- 'FCV_change'
 names(petitions)[22] <- 'LPV_change'
 
+petitions$tax_year = as.character(petitions$tax_year)
+pet = subset(petitions,include == 1)
+
+pet$FCV_change = as.numeric(pet$FCV_change)
+pet$LPV_change = as.numeric(pet$LPV_change)
+
 # plot of LPV changes across the years
-p1a <- ggplot(petitions, aes(x=tax_year, y=FCV_change)) + geom_boxplot() + theme_minimal()
+p1a <- ggplot(pet, aes(x=tax_year, y=FCV_change)) + geom_boxplot() + theme_minimal()
 p1a <- p1a + geom_point(color = "blue",stat = "sum", aes(size = after_stat(n))) 
 
 # plot of FCV changes across the years
-p1b <- ggplot(petitions, aes(x=tax_year, y=LPV_change)) + geom_boxplot() + theme_minimal()
-p1b <- p1b + geom_point(color = "blue",stat = "sum", aes(size = after_stat(n))) 
+p1b <- ggplot(pet, aes(x=tax_year, y=LPV_change)) + geom_boxplot() + theme_minimal()
+p1b <- p1b + geom_point(color = "blue",stat = "sum", aes(size = after_stat(n)))
+
+

@@ -21,6 +21,9 @@ names(petitions)[20] <- 'outcome_details'
 names(petitions)[21] <- 'FCV_change'
 names(petitions)[22] <- 'LPV_change'
 
+petitions$tax_year = as.character(petitions$tax_year)
+pet = subset(petitions,include == 1)
+
 p4a_noNA <- petitions %>% filter(!(is.na(outcome_FCV)|(is.na(tax_year))))
 
 p4a <- ggplot(p4a_noNA %>% count(year, outcome_FCV), 

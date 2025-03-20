@@ -21,6 +21,9 @@ names(petitions)[20] <- 'outcome_details'
 names(petitions)[21] <- 'FCV_change'
 names(petitions)[22] <- 'LPV_change'
 
+petitions$tax_year = as.character(petitions$tax_year)
+pet = subset(petitions,include == 1)
+
 p3a_noNA <- petitions %>% drop_na(FCV_owner, FCV_notice, FCV_decision, tax_year)
 
 p3a <- ggplot(p3a_noNA %>% pivot_longer(cols = c(FCV_owner, FCV_notice, FCV_decision), names_to = "variable", values_to = "value"), 

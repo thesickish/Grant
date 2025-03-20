@@ -21,6 +21,9 @@ names(petitions)[20] <- 'outcome_details'
 names(petitions)[21] <- 'FCV_change'
 names(petitions)[22] <- 'LPV_change'
 
+petitions$tax_year = as.character(petitions$tax_year)
+pet = subset(petitions,include == 1)
+
 petitions$FCV_owner_adv = petitions$FCV_notice - petitions$FCV_decision
 petitions$FCV_owner_disadv = petitions$FCV_decision - petitions$FCV_owner
 
