@@ -53,12 +53,15 @@ pet$FCV_owner_adv2 = pet$FCV_owner_adv - pet$FCV_owner_disadv
 
 p5a2 <- ggplot(pet %>% pivot_longer(cols = c(FCV_owner_adv2), names_to = "variable", values_to = "value"), 
               aes(x = tax_year, y = value, fill = variable)) + 
-  geom_boxplot() + scale_fill_manual(values = c("blue")) + theme_minimal()
+  geom_boxplot() + scale_fill_manual(values = c("blue")) + theme_minimal() + 
+  labs(title = "FCV Advantage minus Disadvantage", x = "Year", y = "", color = "Outcome")
 
 pet$LPV_owner_adv2 = pet$LPV_owner_adv - pet$LPV_owner_disadv
 
 p5b2 <- ggplot(pet %>% pivot_longer(cols = c(LPV_owner_adv2), names_to = "variable", values_to = "value"), 
                aes(x = tax_year, y = value, fill = variable)) + 
-  geom_boxplot() + scale_fill_manual(values = c("blue")) + theme_minimal()
+  geom_boxplot() + scale_fill_manual(values = c("blue")) + theme_minimal() +
+  labs(title = "LPV Advantage minus Disadvantage", x = "Year", y = "", color = "Outcome")
+
 
 

@@ -38,18 +38,26 @@ pet$LPV_owner_adv = pet$LPV_notice - pet$LPV_decision
 pet$LPV_owner_disadv = pet$LPV_decision - pet$LPV_owner
 
 p7a <- ggplot(pet, aes(x=tax_year, y=FCV_owner_adv)) + theme_minimal()
-p7a <- p7a + stat_summary(fun = sum, geom = "bar", aes(group = 1))
+p7a <- p7a + stat_summary(fun = sum, geom = "bar", aes(group = 1)) +
+  labs(title = "Total $ Value Granted (FCV)", x = "Year", y = "", color = "Outcome")
+
 
 p7b <- ggplot(pet, aes(x=tax_year, y=LPV_owner_adv)) + theme_minimal()
-p7b <- p7b + stat_summary(fun = sum, geom = "bar", aes(group = 1))
+p7b <- p7b + stat_summary(fun = sum, geom = "bar", aes(group = 1)) +
+  labs(title = "Total $ Value Granted (LPV)", x = "Year", y = "", color = "Outcome")
+
 
 p7a2 <- ggplot(pet) + theme_minimal()
 p7a2 <- p7a2 + stat_summary(aes(x = tax_year, y = FCV_owner_adv, color = "FCV Owner Adv", group = 1), fun = sum, geom = "line")
 p7a2 <- p7a2 + stat_summary(aes(x = tax_year, y = FCV_owner_disadv, color = "FCV Owner Disadv", group = 1), fun = sum, geom = "line")
-p7a2 <- p7a2 + scale_color_manual(values = c("FCV Owner Adv" = "blue", "FCV Owner Disadv" = "red"))
+p7a2 <- p7a2 + scale_color_manual(values = c("FCV Owner Adv" = "blue", "FCV Owner Disadv" = "red")) +
+  labs(title = "Total $ Value Granted vs Not Granted (FCV)", x = "Year", y = "", color = "Outcome")
+
 
 p7b2 <- ggplot(pet) + theme_minimal()
 p7b2 <- p7b2 + stat_summary(aes(x = tax_year, y = LPV_owner_adv, color = "LPV Owner Adv", group = 1), fun = sum, geom = "line")
 p7b2 <- p7b2 + stat_summary(aes(x = tax_year, y = LPV_owner_disadv, color = "LPV Owner Disadv", group = 1), fun = sum, geom = "line")
-p7b2 <- p7b2 + scale_color_manual(values = c("LPV Owner Adv" = "blue", "LPV Owner Disadv" = "red"))
+p7b2 <- p7b2 + scale_color_manual(values = c("LPV Owner Adv" = "blue", "LPV Owner Disadv" = "red")) +
+  labs(title = "Total $ Value Granted vs Not Granted (LPV)", x = "Year", y = "", color = "Outcome")
+
 

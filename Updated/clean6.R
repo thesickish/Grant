@@ -37,7 +37,9 @@ p6a <- ggplot(pet %>% pivot_longer(cols = c(FCV_owner_gain), names_to = "variabl
                aes(x = tax_year, y = value)) + 
   geom_boxplot() + theme_minimal()
 
-p6a <- p6a + geom_point(color = "blue",stat = "sum", aes(size = after_stat(n))) 
+p6a <- p6a + geom_point(color = "blue",stat = "sum", aes(size = after_stat(n))) +
+  labs(title = "FCV % of Range (Notice - Owner) Granted", x = "Year", y = "", color = "Outcome")
+
 
 pet$LPV_owner_gain = (pet$LPV_notice - pet$LPV_decision)/(pet$LPV_notice - pet$LPV_owner)
 
@@ -45,5 +47,7 @@ p6b <- ggplot(pet %>% pivot_longer(cols = c(LPV_owner_gain), names_to = "variabl
               aes(x = tax_year, y = value)) + 
   geom_boxplot() + theme_minimal()
 
-p6b <- p6b + geom_point(color = "blue",stat = "sum", aes(size = after_stat(n))) 
+p6b <- p6b + geom_point(color = "blue",stat = "sum", aes(size = after_stat(n))) +
+  labs(title = "LPV % of Range (Notice - Owner) Granted", x = "Year", y = "", color = "Outcome")
+
 
