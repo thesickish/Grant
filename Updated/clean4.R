@@ -32,7 +32,7 @@ p4a <- ggplot(pet %>% count(tax_year, outcome_FCV),
                                 "Granted in Full" = "black", 
                                 "Granted in Part" = "darkgrey")) + 
   theme_minimal() + 
-  labs(title = "Trends in Outcomes Over Time", x = "Year", y = "Count", color = "Outcome")
+  labs(title = "Outcomes Over Time", x = "Year", y = "Count", color = "Outcome")
 
 p4b <- ggplot(pet %>% count(tax_year, outcome_LPV), 
               aes(x = tax_year, y = n, color = outcome_LPV, group = outcome_LPV)) + 
@@ -42,4 +42,4 @@ p4b <- ggplot(pet %>% count(tax_year, outcome_LPV),
                                 "Granted in Full" = "black", 
                                 "Granted in Part" = "darkgrey")) + 
   theme_minimal() + 
-  labs(title = "Trends in Outcomes Over Time", x = "Year", y = "Count", color = "Outcome")
+  labs(title = "Outcomes Over Time", x = "Year", y = "Count", color = "Outcome")
