@@ -1,5 +1,6 @@
 
 library(tidyverse)
+library(scales)
 
 # read data into tibble
 petitions <- read_csv("Updated2/master_edited_4.28.25.csv")
@@ -8,7 +9,7 @@ petitions <- read_csv("Updated2/master_edited_4.28.25.csv")
 petitions$ID <- 1:nrow(petitions)
 
 # rename relevant columns
-names(petitions)[1] <- 'include'
+names(petitions)[2] <- 'include'
 names(petitions)[3] <- 'tax_year'
 names(petitions)[11] <- 'FCV_owner'
 names(petitions)[12] <- 'LPV_owner'
@@ -38,7 +39,9 @@ p6a <- ggplot(pet %>% pivot_longer(cols = c(FCV_owner_gain), names_to = "variabl
   geom_boxplot() + theme_minimal()
 
 p6a <- p6a + geom_point(color = "blue",stat = "sum", aes(size = after_stat(n))) +
-  labs(title = "FCV % of Range (Notice - Owner) Granted", x = "Year", y = "", color = "Outcome")
+  labs(title = "Full Cash Value (FCV) % of Range Granted", x = "Tax Year", y = "Percent") +
+  scale_size_continuous(name = "Number of Petitions",breaks = c(2,4,6,8)) +
+  scale_y_continuous(labels = percent)
 
 
 pet$LPV_owner_gain = (pet$LPV_notice - pet$LPV_decision)/(pet$LPV_notice - pet$LPV_owner)
@@ -48,6 +51,8 @@ p6b <- ggplot(pet %>% pivot_longer(cols = c(LPV_owner_gain), names_to = "variabl
   geom_boxplot() + theme_minimal()
 
 p6b <- p6b + geom_point(color = "blue",stat = "sum", aes(size = after_stat(n))) +
-  labs(title = "LPV % of Range (Notice - Owner) Granted", x = "Year", y = "", color = "Outcome")
+  labs(title = "Limited Property Value (LPV) % of Range Granted", x = "Tax Year", y = "Percent") +
+scale_size_continuous(name = "Number of Petitions",breaks = c(2,4,6,8)) +
+  scale_y_continuous(labels = percent)
 
 

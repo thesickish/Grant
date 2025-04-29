@@ -8,7 +8,7 @@ petitions <- read_csv("Updated2/master_edited_4.28.25.csv")
 petitions$ID <- 1:nrow(petitions)
 
 # rename relevant columns
-names(petitions)[1] <- 'include'
+names(petitions)[2] <- 'include'
 names(petitions)[3] <- 'tax_year'
 names(petitions)[11] <- 'FCV_owner'
 names(petitions)[12] <- 'LPV_owner'

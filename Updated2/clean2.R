@@ -8,7 +8,7 @@ petitions <- read_csv("Updated2/master_edited_4.28.25.csv")
 petitions$ID <- 1:nrow(petitions)
 
 # rename relevant columns
-names(petitions)[1] <- 'include'
+names(petitions)[2] <- 'include'
 names(petitions)[3] <- 'tax_year'
 names(petitions)[11] <- 'FCV_owner'
 names(petitions)[12] <- 'LPV_owner'
@@ -35,10 +35,13 @@ p2a2 <- p2a2 + geom_text(stat = "count",
     aes(label = paste0(round(after_stat(count / tapply(..count.., ..x.., sum)[as.character(..x..)] * 100), 1), "%")),
     position = position_stack(vjust = 0.5), color = "white", size = 2.5)
 p2a2 <- p2a2 + scale_fill_manual(values = c("No Change or Worse" = "darkgreen","Granted in Full" = "black","Granted in Part" = "darkgrey"))
+p2a2 <- p2a2 + labs(fill = "Outcome for Full Cash Value (FCV)")
+p2a2 <- p2a2 + labs(x = "Tax Year", y = "Number of Petitions")
 
 p2b2 <- ggplot(pet, aes(x = tax_year, fill = outcome_LPV)) + geom_bar(position = "stack") + theme_minimal() 
 p2b2 <- p2b2 + geom_text(stat = "count", 
                          aes(label = paste0(round(after_stat(count / tapply(..count.., ..x.., sum)[as.character(..x..)] * 100), 1), "%")),
                          position = position_stack(vjust = 0.5), color = "white", size = 2.5)
 p2b2 <- p2b2 + scale_fill_manual(values = c("No Change or Worse" = "darkgreen","Granted in Full" = "black","Granted in Part" = "darkgrey"))
-
+p2b2 <- p2b2 + labs(fill = "Outcome for Limited Property Value (LPV)")
+p2b2 <- p2b2 + labs(x = "Tax Year", y = "Number of Petitions")
