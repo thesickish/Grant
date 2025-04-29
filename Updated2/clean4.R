@@ -8,7 +8,7 @@ petitions <- read_csv("Updated2/master_edited_4.28.25.csv")
 petitions$ID <- 1:nrow(petitions)
 
 # rename relevant columns
-names(petitions)[1] <- 'include'
+names(petitions)[2] <- 'include'
 names(petitions)[3] <- 'tax_year'
 names(petitions)[11] <- 'FCV_owner'
 names(petitions)[12] <- 'LPV_owner'
@@ -32,7 +32,8 @@ p4a <- ggplot(pet %>% count(tax_year, outcome_FCV),
                                 "Granted in Full" = "black", 
                                 "Granted in Part" = "darkgrey")) + 
   theme_minimal() + 
-  labs(title = "Outcomes Over Time", x = "Year", y = "Count", color = "Outcome")
+  labs(title = "Outcomes Over Time", x = "Tax Year", y = "Number of Petitions", color = "Outcome for Full Cash Value (FCV)")
+  
 
 p4b <- ggplot(pet %>% count(tax_year, outcome_LPV), 
               aes(x = tax_year, y = n, color = outcome_LPV, group = outcome_LPV)) + 
@@ -42,4 +43,4 @@ p4b <- ggplot(pet %>% count(tax_year, outcome_LPV),
                                 "Granted in Full" = "black", 
                                 "Granted in Part" = "darkgrey")) + 
   theme_minimal() + 
-  labs(title = "Outcomes Over Time", x = "Year", y = "Count", color = "Outcome")
+  labs(title = "Outcomes Over Time", x = "Tax Year", y = "Number of Petitions", color = "Outcome for Limited Property Value (LPV)")
