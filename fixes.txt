@@ -1,0 +1,23 @@
+Especially in the FCV % range granted, we see a lot of outliers. Do you have time to sit down and go through outliers, just to make sure there’s nothing else wrong with the data? A couple of the other charts also have some funny spots, such as $ value granted/not granted with the 2013 result.
+
+For FCV/LPV decision summary line – can we have different colors? It’s very hard to distinguish.
+
+On all the plots, can we have an asterisk noting that some years did not have a petition/data?
+
+For all the graphs, can we have the y-axis information on the right side also? Many of the years we’re interested are later chronologically.
+
+For graphs with dollar values (in the millions). Do you want both “dollars (in millions)” and the letter “M” next to the numbers? I’m split on this.
+
+The size of the dots for the box plot are hard to distinguish. Is there another format we can use? Maybe size and a color scale?
+
+For side by side comparisons of FCV and LPV on the same type of plot, can we make sure the y-axis is the same in terms of intervals?
+
+This is a wild one: can we animate these plots so long year shows up at a time?
+
+Can you provide a great analogy for why we should not be looking at a single year of data? Something that you would say to undergrads—i.e., something that will resonate with laypeople?
+
+Row 40, regarding 102-04-044C’s petition in 2010 for the 2011 tax year. The LPV by Notice incorrectly states 650211. It should be 642211.
+
+Row 44, regarding 102-01-012A’s petition in 2010 for the 2011 tax year. The correct FCV Decision and LPV decision should both be 1345207. It incorrectly states 1315207.
+
+Row 4, regarding 105-22-023. Decision value should be 30000, not 47000.
