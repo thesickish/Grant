@@ -2,7 +2,7 @@
 library(tidyverse)
 
 # read data into tibble
-petitions <- read_csv("Updated2/master_edited_4.28.25.csv")
+petitions <- read_csv("Updated2/master_edited_5.2.25.csv")
 
 # create identifier
 petitions$ID <- 1:nrow(petitions)
@@ -33,8 +33,10 @@ pet$LPV_decision = as.numeric(pet$LPV_decision)
 
 p3a <- ggplot(pet %>% pivot_longer(cols = c(FCV_owner, FCV_notice, FCV_decision), names_to = "variable", values_to = "value"), 
        aes(x = tax_year, y = value, fill = variable)) + 
-       geom_boxplot() + scale_fill_manual(values = c("red", "blue", "green")) + theme_minimal()
+       geom_boxplot() + scale_fill_manual(values = c("red", "blue", "darkgreen")) + theme_minimal() +
+       scale_y_continuous(sec.axis = dup_axis(name = ""))
 
 p3b <- ggplot(pet %>% pivot_longer(cols = c(LPV_owner, LPV_notice, LPV_decision), names_to = "variable", values_to = "value"), 
-              aes(x = tax_year, y = value, fill = variable)) + 
-  geom_boxplot() + scale_fill_manual(values = c("red", "blue", "green")) + theme_minimal()
+       aes(x = tax_year, y = value, fill = variable)) + 
+       geom_boxplot() + scale_fill_manual(values = c("red", "blue", "darkgreen")) + theme_minimal() +
+       scale_y_continuous(sec.axis = dup_axis(name = ""))

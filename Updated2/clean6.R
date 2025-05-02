@@ -1,9 +1,10 @@
 
 library(tidyverse)
 library(scales)
+library(viridis)
 
 # read data into tibble
-petitions <- read_csv("Updated2/master_edited_4.28.25.csv")
+petitions <- read_csv("Updated2/master_edited_5.2.25.csv")
 
 # create identifier
 petitions$ID <- 1:nrow(petitions)
@@ -38,11 +39,12 @@ p6a <- ggplot(pet %>% pivot_longer(cols = c(FCV_owner_gain), names_to = "variabl
                aes(x = tax_year, y = value)) + 
   geom_boxplot() + theme_minimal()
 
-p6a <- p6a + geom_point(color = "blue",stat = "sum", aes(size = after_stat(n))) +
+p6a <- p6a + geom_point(stat = "sum", aes(size = after_stat(n),color = after_stat(n))) +
   labs(title = "Full Cash Value (FCV) % of Range Granted", x = "Tax Year", y = "Percent") +
-  scale_size_continuous(name = "Number pet[order(-pet$FCV_owner_gain), ]of Petitions",breaks = c(2,4,6,8)) +
-  scale_y_continuous(labels = percent)
-
+  scale_size_continuous(name = "Number of Petitions",breaks = c(2,4,6),guide = guide_legend(reverse = TRUE)) +
+  scale_color_viridis_c(name = "",breaks = c(2, 4, 6),option = "C",direction = 1) +
+  scale_y_continuous(labels = percent, sec.axis = dup_axis(name = ""),
+  limits = c(-.5,5), breaks = seq(0, 5, by = 1))
 
 pet$LPV_owner_gain = (pet$LPV_notice - pet$LPV_decision)/(pet$LPV_notice - pet$LPV_owner)
 
@@ -50,9 +52,11 @@ p6b <- ggplot(pet %>% pivot_longer(cols = c(LPV_owner_gain), names_to = "variabl
               aes(x = tax_year, y = value)) + 
   geom_boxplot() + theme_minimal()
 
-p6b <- p6b + geom_point(color = "blue",stat = "sum", aes(size = after_stat(n))) +
+p6b <- p6b + geom_point(stat = "sum", aes(size = after_stat(n),color = after_stat(n))) +
   labs(title = "Limited Property Value (LPV) % of Range Granted", x = "Tax Year", y = "Percent") +
-scale_size_continuous(name = "Number of Petitions",breaks = c(2,4,6,8)) +
-  scale_y_continuous(labels = percent)
+  scale_size_continuous(name = "Number of Petitions",breaks = c(2,4,6),guide = guide_legend(reverse = TRUE)) +
+  scale_color_viridis_c(name = "",breaks = c(2, 4, 6),option = "C",direction = 1) +
+  scale_y_continuous(labels = percent, sec.axis = dup_axis(name = ""),
+  limits = c(-.5,5), breaks = seq(0, 5, by = 1))
 
 

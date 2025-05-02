@@ -2,7 +2,7 @@
 library(tidyverse)
 
 # read data into tibble
-petitions <- read_csv("Updated2/master_edited_4.28.25.csv")
+petitions <- read_csv("Updated2/master_edited_5.2.25.csv")
 
 # create identifier
 petitions$ID <- 1:nrow(petitions)
@@ -26,22 +26,26 @@ pet = subset(petitions,include == 1)
 
 p2a <- ggplot(pet, aes(x = tax_year, fill = outcome_FCV)) + geom_bar(position = "stack") + theme_minimal()  
 p2a <- p2a + labs(title = "Number of Observations per Year by Outcome",x = "Year",y = "Total Count",fill = "Outcome")
+p2a <- p2a + scale_y_continuous(sec.axis = dup_axis(name = ""))
 
 p2b <- ggplot(pet, aes(x = tax_year, fill = outcome_LPV)) + geom_bar(position = "stack") + theme_minimal()  
 p2b <- p2b + labs(title = "Number of Observations per Year by Outcome",x = "Year",y = "Total Count",fill = "Outcome")
+p2b <- p2b + scale_y_continuous(sec.axis = dup_axis(name = ""))
 
 p2a2 <- ggplot(pet, aes(x = tax_year, fill = outcome_FCV)) + geom_bar(position = "stack") + theme_minimal() 
 p2a2 <- p2a2 + geom_text(stat = "count", 
     aes(label = paste0(round(after_stat(count / tapply(..count.., ..x.., sum)[as.character(..x..)] * 100), 1), "%")),
     position = position_stack(vjust = 0.5), color = "white", size = 2.5)
-p2a2 <- p2a2 + scale_fill_manual(values = c("No Change or Worse" = "darkgreen","Granted in Full" = "black","Granted in Part" = "darkgrey"))
+p2a2 <- p2a2 + scale_fill_manual(values = c("No Change or Worse" = "darkgreen","Granted in Full" = "blue","Granted in Part" = "red"))
 p2a2 <- p2a2 + labs(fill = "Outcome for Full Cash Value (FCV)")
 p2a2 <- p2a2 + labs(x = "Tax Year", y = "Number of Petitions")
+p2a2 <- p2a2 + scale_y_continuous(sec.axis = dup_axis(name = ""))
 
 p2b2 <- ggplot(pet, aes(x = tax_year, fill = outcome_LPV)) + geom_bar(position = "stack") + theme_minimal() 
 p2b2 <- p2b2 + geom_text(stat = "count", 
                          aes(label = paste0(round(after_stat(count / tapply(..count.., ..x.., sum)[as.character(..x..)] * 100), 1), "%")),
                          position = position_stack(vjust = 0.5), color = "white", size = 2.5)
-p2b2 <- p2b2 + scale_fill_manual(values = c("No Change or Worse" = "darkgreen","Granted in Full" = "black","Granted in Part" = "darkgrey"))
+p2b2 <- p2b2 + scale_fill_manual(values = c("No Change or Worse" = "darkgreen","Granted in Full" = "blue","Granted in Part" = "red"))
 p2b2 <- p2b2 + labs(fill = "Outcome for Limited Property Value (LPV)")
 p2b2 <- p2b2 + labs(x = "Tax Year", y = "Number of Petitions")
+p2b2 <- p2b2 + scale_y_continuous(sec.axis = dup_axis(name = ""))
