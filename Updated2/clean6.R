@@ -40,7 +40,7 @@ p6a <- ggplot(pet %>% pivot_longer(cols = c(FCV_owner_gain), names_to = "variabl
 
 p6a <- p6a + geom_point(color = "blue",stat = "sum", aes(size = after_stat(n))) +
   labs(title = "Full Cash Value (FCV) % of Range Granted", x = "Tax Year", y = "Percent") +
-  scale_size_continuous(name = "Number of Petitions",breaks = c(2,4,6,8)) +
+  scale_size_continuous(name = "Number pet[order(-pet$FCV_owner_gain), ]of Petitions",breaks = c(2,4,6,8)) +
   scale_y_continuous(labels = percent)
 
 
